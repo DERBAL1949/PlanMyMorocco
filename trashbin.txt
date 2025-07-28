@@ -1,0 +1,16 @@
+// get data from request body
+ 
+const user = new User(req.body); 
+ 
+// login : 
+ 
+const bcrypt = require('bcrypt'); // for password hashing comparison
+ 
+"type": "module",
+ 
+{
+  "type": "module"
+},
+ 
+app.use('/users', userRoutes);
+ 
