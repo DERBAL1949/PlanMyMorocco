@@ -13,7 +13,10 @@ app.use(express.json());
 
 // Routes
 app.use("/v1", apiRoutes);
-
+// ensuring that backend work on vercel
+app.get("/", (_, res) => {
+  res.send("Welcome to Plan My Morocco API!");
+});
 // Connect DB and start server
 connectDB().then(() => {
   const PORT = process.env.PORT || 5000;
