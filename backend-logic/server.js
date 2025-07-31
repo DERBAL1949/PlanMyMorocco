@@ -19,7 +19,22 @@ app.get("/", (_, res) => {
 app.use("/v1", apiRoutes);
 
 // Connect DB and start server
-connectDB().then(() => {
-  const PORT = process.env.PORT || 5000;
-  app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+// connectDB().then(() => {
+//   const PORT = process.env.PORT || 5000;
+//   app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+// });
+
+// here we did listen then connect on db not like first
+const PORT = process.env.PORT || 5000;
+
+app.listen(PORT, () => {
+  console.log(`✅ Server running on port ${PORT}`);
+
+  connectDB()
+    .then(() => {
+      console.log("✅ Connected to MongoDB");
+    })
+    .catch((err) => {
+      console.error("❌ MongoDB connection failed:", err.message);
+    });
 });
