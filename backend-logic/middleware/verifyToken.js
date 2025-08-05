@@ -16,7 +16,7 @@ const verifyToken = (req, res, next) => {
     req.user = decoded; // you can access req.user in other routes
     next();
   } catch (err) {
-    res.status(403).json({ message: "Invalid token" });
+    res.status(403).json({ isValid: false });
   }
 };
 
