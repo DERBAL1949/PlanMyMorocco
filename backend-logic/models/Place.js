@@ -8,8 +8,22 @@ const placeSchema = new mongoose.Schema({
   },
   name: { type: String, required: true },
   description: String,
-  type: String, // e.g., "Historical", "Natural", "Entertainment"
-  entryFees: Number,
+  type: {
+    type: [String],
+    required: true,
+    enum: ["nature", "monument", "souk", "museum", "restaurant"],
+  },
+  // e.g., "Historical", "Natural", "Entertainment"
+  entryFees: {
+    moroccan: {
+      type: Number,
+      default: 0,
+    },
+    foreigner: {
+      type: Number,
+      default: 0,
+    },
+  }, // it's an object because we will calculate the price based on the nationality
   averagePrice: Number,
   openHours: String, // e.g., "9am - 6pm"
   transportDetails: String,
