@@ -4,10 +4,10 @@ import bcrypt from "bcryptjs";
 // Register Controller
 export const registerUser = async (req, res) => {
   try {
-    const { fullName, username, email, password } = req.body;
+    const { firstName, lastName, username, email, password } = req.body;
 
     // Validate input
-    if (!fullName || !username || !email || !password) {
+    if (!firstName || !lastName || !email || !password) {
       return res.status(400).json({ message: "All fields are required" });
     }
 
@@ -17,25 +17,37 @@ export const registerUser = async (req, res) => {
       return res.status(400).json({ message: "Email already in use" });
     }
 
-    // Check if username exists
-    const existingUsername = await User.findOne({ username });
-    if (existingUsername) {
-      return res.status(400).json({ message: "Username already taken" });
-    }
+    // // Check if username exists
+    // const existingUsername = await User.findOne({ username });
+    // if (existingUsername) {
+    //   return res.status(400).json({ message: "Username already taken" });
+    // }
 
     // Hash password
     const hashedPassword = await bcrypt.hash(password, 10);
 
     // Create new user
     const newUser = new User({
-      fullName,
-      username,
+      firstName,
+      lastName,
       email,
       password: hashedPassword,
     });
     await newUser.save();
 
-    res.status(201).json(newUser);
+    // ✅ Create a token
+    const token = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET, {
+      expiresIn: "1d",
+    });
+
+    // ✅ Return token + user data
+    res.status(201).json({
+      message: "Registration successful",
+      token,
+      userId: newUser._id,
+      username: newUser.username,
+      email: newUser.email,
+    });
   } catch (error) {
     res.status(400).json({ message: error.message });
   }

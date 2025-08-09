@@ -3,15 +3,14 @@ import mongoose from "mongoose";
 // Schema definition
 const userSchema = new mongoose.Schema(
   {
-    fullName: {
+    firstName: {
       type: String,
       required: true,
       trim: true,
     },
-    username: {
+    lastName: {
       type: String,
       required: true,
-      unique: true,
       trim: true,
     },
     email: {
