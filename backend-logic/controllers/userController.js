@@ -4,7 +4,7 @@ import bcrypt from "bcryptjs";
 // Register Controller
 export const registerUser = async (req, res) => {
   try {
-    const { firstName, lastName, username, email, password } = req.body;
+    const { firstName, lastName, email, password } = req.body;
 
     // Validate input
     if (!firstName || !lastName || !email || !password) {
