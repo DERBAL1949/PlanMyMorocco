@@ -1,5 +1,4 @@
 import City from "../models/City.js";
-import Place from "../models/Place.js";
 
 // Create a new city by the Admin
 // export const createCity = async (req, res) => {
@@ -22,25 +21,5 @@ export const getAllCities = async (req, res) => {
     console.error("Error fetching cities:", err);
 
     res.status(500).json({ message: "Failed to fetch cities", error: err });
-  }
-};
-
-//Get one city by ID
-export const getPlaces = async (req, res) => {
-  try {
-    const cityId = req.params.id;
-
-    const city = await City.findById(cityId);
-
-    const places = await Place.find({ city: cityId });
-
-    res.status(200).json({
-      city,
-      places,
-    });
-  } catch (err) {
-    res
-      .status(500)
-      .json({ message: "Failed to fetch city and places", error: err });
   }
 };

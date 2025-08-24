@@ -3,7 +3,6 @@ import express from "express";
 import {
   // createCity,
   getAllCities,
-  getPlaces,
 } from "../controllers/cityController.js";
 
 const router = express.Router();
@@ -13,9 +12,6 @@ const router = express.Router();
 
 // GET /v1/cities  --> for getting all cities in the dropdown UI
 router.get("/", getAllCities);
-
-// @route   GET /api/cities/:id--> get one city with its places
-router.get("/:id", getPlaces);
 
 // // @route   PUT /api/cities/:id
 // router.put("/:id", updateCity);
