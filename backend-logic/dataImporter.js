@@ -18,7 +18,7 @@ function parseEntryFees(value) {
     foreigner: foreignerMatch ? parseInt(foreignerMatch[1]) : 0,
   };
 }
-// this is foe avgPrice
+// this is for avgPrice
 function extractNumber(value) {
   const match = typeof value === "string" ? value.match(/\d+(\.\d+)?/) : null;
   return match ? parseFloat(match[0]) : typeof value === "number" ? value : 0;
